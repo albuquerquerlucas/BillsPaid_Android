@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.samuniz.billspaid_android.Activities.LoginActivity">
+
+    <EditText
+        android:id="@+id/edtEmailL"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/edtSenhaL"
+        app:layout_constraintEnd_toEndOf="@+id/imgLogo"
+        app:layout_constraintStart_toStartOf="@+id/imgLogo"
+        app:layout_constraintTop_toBottomOf="@+id/imgLogo" />
+
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/edtEmailL"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:srcCompat="@drawable/logobilsspaid" />
+
+    <EditText
+        android:id="@+id/edtSenhaL"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/btnLoginL"
+        app:layout_constraintEnd_toEndOf="@+id/edtEmailL"
+        app:layout_constraintStart_toStartOf="@+id/edtEmailL"
+        app:layout_constraintTop_toBottomOf="@+id/edtEmailL" />
+
+    <Button
+        android:id="@+id/btnLoginL"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/btn_login"
+        app:layout_constraintBottom_toTopOf="@+id/btnCadastroL"
+        app:layout_constraintEnd_toEndOf="@+id/edtSenhaL"
+        app:layout_constraintStart_toStartOf="@+id/edtSenhaL"
+        app:layout_constraintTop_toBottomOf="@+id/edtSenhaL" />
+
+    <TextView
+        android:id="@+id/btnCadastroL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Criar uma conta"
+        android:textAlignment="textEnd"
+        android:textColor="@color/colorLinkRed"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btnLoginL"
+        app:layout_constraintStart_toStartOf="@+id/btnLoginL"
+        app:layout_constraintTop_toBottomOf="@+id/btnLoginL" />
+</android.support.constraint.ConstraintLayout>
