@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="Nova Receita"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:background="@color/receitas_bground"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp">
+
+        <EditText
+            android:id="@+id/edtDescricaoFormR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ex. Salário"
+            android:inputType="text"
+            android:imeOptions="actionNext"/>
+
+        <EditText
+            android:id="@+id/edtValorFormR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Valor R$"
+            android:inputType="numberDecimal"
+            android:imeOptions="actionDone"/>
+
+        <Button
+            android:id="@+id/btnSalvarFormR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Salvar"
+            android:layout_gravity="right"/>
+    </LinearLayout>
+</LinearLayout>
