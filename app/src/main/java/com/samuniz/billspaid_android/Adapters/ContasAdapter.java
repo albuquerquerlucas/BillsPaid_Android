@@ -38,7 +38,7 @@ public class ContasAdapter extends ArrayAdapter {
         TextView txtItemDescricaoC = linha.findViewById(R.id.txtItemDescricaoC);
         TextView txtItemValorC = linha.findViewById(R.id.txtItemValorC);
 
-        txtItemDescricaoC.setText(contas.get(position).getDescricao());
+        txtItemDescricaoC.setText(contas.get(position).getDescricao() );
         txtItemValorC.setText(contas.get(position).getValor());
 
         return linha;
