@@ -5,4 +5,8 @@
     <color name="colorAccent">#7ab82c</color>
     <color name="colorLinkRed">#c40f16</color>
     <color name="colorLinkGreen">#8ec34b</color>
+
+    <color name="contas_bground">#929dff</color>
+    <color name="despesas_bground">#ff9294</color>
+    <color name="receitas_bground">#a4ff92</color>
 </resources>
