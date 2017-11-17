@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,7 +34,9 @@ import java.util.UUID;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private TextView txtContasM, txtDespesasM, txtReceitasM;
+    private TextView textCardContVal, textCardDespVal, textCardRecVal;
     private Button btnContaM, btnDespesaM, btnReceitaM;
+    private CardView cardContas, cardDespesas, cardReceitas;
     private AlertDialog aFormContas, aFormDespesas, aFormReceitas;
     private FirebaseAuth mmAuth;
     private FirebaseUser mmUser;
@@ -70,6 +73,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onResume() {
         super.onResume();
 
+        cardContas = findViewById(R.id.cardContas);
+        cardContas.setOnClickListener(this);
+
+        cardDespesas = findViewById(R.id.cardDespesas);
+        cardDespesas.setOnClickListener(this);
+
+        cardReceitas = findViewById(R.id.cardReceitas);
+        cardReceitas.setOnClickListener(this);
+
         btnContaM = findViewById(R.id.btnContaM);
         btnContaM.setOnClickListener(this);
 
@@ -83,13 +95,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.txtContasM:
+            case R.id.cardContas:
                 goToContasLista();
                 break;
-            case R.id.txtDespesasM:
+            case R.id.cardDespesas:
                 goToDespesasLista();
                 break;
-            case R.id.txtReceitasM:
+            case R.id.cardReceitas:
                 goToReceitasLista();
                 break;
             case R.id.btnContaM:
@@ -212,8 +224,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void preencheCardContas(){
         contas = new ArrayList<>();
         listaParaSomaContas = new ArrayList<>();
-        txtContasM = findViewById(R.id.txtContasM);
-        txtContasM.setOnClickListener(this);
+        textCardContVal = findViewById(R.id.textCardContVal);
+        textCardContVal.setOnClickListener(this);
 
         dbClientes.addValueEventListener(new ValueEventListener() {
             @Override
@@ -224,7 +236,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     listaParaSomaContas.add(c.getValor());
                     calcular = new CalculaValores();
                     String total = calcular.calculaTotal(listaParaSomaContas);
-                    txtContasM.setText(total);
+                    textCardContVal.setText(total);
                 }
             }
 
@@ -238,8 +250,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void preencheCardDespesas(){
         despesas = new ArrayList<>();
         listaParaSomaDespesas = new ArrayList<>();
-        txtDespesasM = findViewById(R.id.txtDespesasM);
-        txtDespesasM.setOnClickListener(this);
+        textCardDespVal = findViewById(R.id.textCardDespVal);
+        textCardDespVal.setOnClickListener(this);
 
         dbDespesas.addValueEventListener(new ValueEventListener() {
             @Override
@@ -250,7 +262,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     listaParaSomaDespesas.add(d.getValor());
                     calcular = new CalculaValores();
                     String total = calcular.calculaTotal(listaParaSomaDespesas);
-                    txtDespesasM.setText(total);
+                    textCardDespVal.setText(total);
                 }
             }
 
@@ -264,8 +276,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void preencheCardReceitas(){
         receitas = new ArrayList<>();
         listaParaSomaReceitas = new ArrayList<>();
-        txtReceitasM = findViewById(R.id.txtReceitasM);
-        txtReceitasM.setOnClickListener(this);
+        textCardRecVal = findViewById(R.id.textCardRecVal);
+        textCardRecVal.setOnClickListener(this);
 
         dbReceitas.addValueEventListener(new ValueEventListener() {
             @Override
@@ -276,7 +288,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     listaParaSomaReceitas.add(r.getValor());
                     calcular = new CalculaValores();
                     String total = calcular.calculaTotal(listaParaSomaReceitas);
-                    txtReceitasM.setText(total);
+                    textCardRecVal.setText(total);
                 }
             }
 
