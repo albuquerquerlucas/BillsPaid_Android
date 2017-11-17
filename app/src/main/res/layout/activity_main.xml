@@ -1,148 +1,293 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ContraintPrincipal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.samuniz.billspaid_android.Activities.MainActivity">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_above="@+id/layout2M"
-        android:gravity="center_vertical">
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_gravity="center_vertical">
-
-            <TextView
-                android:layout_width="260dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:textStyle="bold"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:text="Para visualizar o conteúdo dos cards, toque sob os valores"/>
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="5dp"
-                android:src="@drawable/iclogo"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:gravity="center"
-            android:background="@color/contas_bground">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Contas"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/txtContasM"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="R$ 0,00"
-                android:textSize="25sp"
-                android:textStyle="bold"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:padding="20dp"
-            android:gravity="center"
-            android:background="@color/despesas_bground">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Despesas"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/txtDespesasM"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="R$ 0,00"
-                android:textSize="25sp"
-                android:textStyle="bold"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:padding="20dp"
-            android:gravity="center"
-            android:background="@color/receitas_bground">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Receitas"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/txtReceitasM"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="R$ 0,00"
-                android:textSize="25sp"
-                android:textStyle="bold"/>
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/layout2M"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        android:gravity="center_horizontal"
-        android:layout_alignParentBottom="true">
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardDespesas"
+            android:layout_width="320dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="8dp"
+            app:cardBackgroundColor="@color/card_despesa_backgound"
+            app:layout_constraintEnd_toEndOf="@+id/cardContas"
+            app:layout_constraintStart_toStartOf="@+id/cardContas"
+            app:layout_constraintTop_toBottomOf="@+id/cardContas">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textCardDespVal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginTop="8dp"
+                    android:text="0,00"
+                    android:textAppearance="@android:style/TextAppearance.Material.Large"
+                    android:textColor="@color/card_despesa_backgound_fonte"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/sibRealD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/real"
+                    android:textAppearance="@android:style/TextAppearance.Material.Large"
+                    android:textColor="@color/card_despesa_backgound_fonte"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/textCardDespVal"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textCardDespDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Despesas"
+                    android:textAlignment="viewStart"
+                    android:textAppearance="@android:style/TextAppearance.Material.Large"
+                    android:textColor="@color/card_despesa_backgound_fonte"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardReceitas"
+            android:layout_width="320dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="8dp"
+            app:cardBackgroundColor="@color/card_receita_backgound"
+            app:layout_constraintEnd_toEndOf="@+id/cardDespesas"
+            app:layout_constraintStart_toStartOf="@+id/cardDespesas"
+            app:layout_constraintTop_toBottomOf="@+id/cardDespesas">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textCardRecVal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginTop="8dp"
+                    android:text="0,00"
+                    android:textAppearance="@android:style/TextAppearance.Material.Large"
+                    android:textColor="@color/card_receita_backgound_fonte"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/sibRealR"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/real"
+                    android:textAppearance="@android:style/TextAppearance.Material.Large"
+                    android:textColor="@color/card_receita_backgound_fonte"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/textCardRecVal"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textCardRecDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Receitas"
+                    android:textAlignment="viewStart"
+                    android:textAppearance="@android:style/TextAppearance.Material.Large"
+                    android:textColor="@color/card_receita_backgound_fonte"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardContas"
+            android:layout_width="320dp"
+            android:layout_height="75dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            app:cardBackgroundColor="@color/card_conta_backgound"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textCardContVal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginTop="8dp"
+                    android:text="0,00"
+                    android:textAppearance="@android:style/TextAppearance.Material.Large"
+                    android:textColor="@color/card_conta_backgound_fonte"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/sibRealC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/real"
+                    android:textAppearance="@android:style/TextAppearance.Material.Large"
+                    android:textColor="@color/card_conta_backgound_fonte"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/textCardContVal"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textCardContDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Saldo Contas"
+                    android:textAlignment="viewStart"
+                    android:textAppearance="@android:style/TextAppearance.Material.Large"
+                    android:textColor="@color/card_conta_backgound_fonte"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v7.widget.CardView>
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/ContraintButton"
+        android:layout_width="0dp"
+        android:layout_height="58dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
         <Button
             android:id="@+id/btnContaM"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/card_conta_backgound"
             android:text="+ Conta"
-            style="@style/Widget.AppCompat.Button.Colored"/>
-
-        <Button
-            android:id="@+id/btnDespesaM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="+ Despesa"
-            style="@style/Widget.AppCompat.Button.Colored"/>
+            android:textColor="@color/card_conta_backgound_fonte"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnDespesaM"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btnReceitaM"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/card_receita_backgound"
             android:text="+ Receita"
-            style="@style/Widget.AppCompat.Button.Colored"/>
-    </LinearLayout>
-</RelativeLayout>
+            android:textColor="@color/card_receita_backgound_fonte"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnDespesaM"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnDespesaM"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/card_despesa_backgound"
+            android:text="+ Despesa"
+            android:textColor="@color/card_despesa_backgound_fonte"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnReceitaM"
+            app:layout_constraintStart_toEndOf="@+id/btnContaM"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

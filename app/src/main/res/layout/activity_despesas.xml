@@ -15,14 +15,14 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="5dp"
-            android:paddingLeft="16dp"
+            android:background="@color/colorPrimary"
             android:paddingBottom="5dp"
+            android:paddingLeft="16dp"
+            android:paddingTop="5dp"
             android:text="Minhas Despesas"
             android:textColor="#000000"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:background="@color/despesas_bground"/>
+            android:textStyle="bold" />
 
         <ListView
             android:id="@+id/listDespesasCL"
@@ -35,19 +35,19 @@
 
     <LinearLayout
         android:id="@+id/layoutDLista2"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/despesas_bground"
-        android:gravity="right">
+        android:background="@color/colorPrimary"
+        android:gravity="right"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="5dp"
-            android:paddingLeft="16dp"
             android:paddingBottom="5dp"
+            android:paddingLeft="16dp"
+            android:paddingTop="5dp"
             android:text="Total R$"
             android:textColor="#000000"
             android:textSize="18sp"
@@ -57,13 +57,13 @@
             android:id="@+id/txtDespesasListaTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:paddingLeft="5dp"
             android:paddingRight="16dp"
-            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
             android:text="0,00"
             android:textColor="#000000"
             android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
     </LinearLayout>
 </RelativeLayout>
