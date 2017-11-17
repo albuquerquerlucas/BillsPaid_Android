@@ -27,6 +27,7 @@ import java.util.List;
     public class CadastroActivity extends Activity {
 
         private EditText edtNomeC, edtEmailC, edtSenhaC;
+        private TextView btnPossuiCadastro;
         private Button btnCadastrarC;
         private String nomeInput, emailInput, senhaInput;
         private FirebaseAuth mAuth;
@@ -50,7 +51,9 @@ import java.util.List;
             edtNomeC = findViewById(R.id.edtNomeC);
             edtEmailC = findViewById(R.id.edtEmailC);
             edtSenhaC = findViewById(R.id.edtSenhaC);
+            btnPossuiCadastro = findViewById(R.id.btnPossuiCadastro);
             btnCadastrarC = findViewById(R.id.btnCadastrarC);
+            btnPossuiCadastro.setOnClickListener((View.OnClickListener) this);
 
             btnCadastrarC.setOnClickListener(new View.OnClickListener() {
                 @Override
