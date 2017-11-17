@@ -3,4 +3,5 @@
     <string name="btn_save">SALVAR</string>
     <string name="btn_login">LOGIN</string>
     <string name="btn_cadastrar">CADASTRAR</string>
+    <string name="real">R$</string>
 </resources>
