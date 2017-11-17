@@ -2,7 +2,7 @@ package com.samuniz.billspaid_android.Entities;
 
 import java.io.Serializable;
 
-public class Receita implements Serializable{
+public class Receita implements Serializable {
     private String id;
     private String descricao;
     private String valor;
