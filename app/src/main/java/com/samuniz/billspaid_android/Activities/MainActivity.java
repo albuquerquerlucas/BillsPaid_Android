@@ -230,6 +230,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dbClientes.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                contas.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Conta c = snapshot.getValue(Conta.class);
                     contas.add(c);
