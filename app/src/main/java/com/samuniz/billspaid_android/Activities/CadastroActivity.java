@@ -24,7 +24,7 @@ import com.samuniz.billspaid_android.R;
 import java.util.ArrayList;
 import java.util.List;
 
-    public class CadastroActivity extends Activity {
+    public class CadastroActivity extends Activity implements View.OnClickListener{
 
         private EditText edtNomeC, edtEmailC, edtSenhaC;
         private TextView btnPossuiCadastro;
@@ -53,14 +53,21 @@ import java.util.List;
             edtSenhaC = findViewById(R.id.edtSenhaC);
             btnPossuiCadastro = findViewById(R.id.btnPossuiCadastro);
             btnCadastrarC = findViewById(R.id.btnCadastrarC);
-            btnPossuiCadastro.setOnClickListener((View.OnClickListener) this);
 
-            btnCadastrarC.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            btnPossuiCadastro.setOnClickListener(this);
+            btnCadastrarC.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.btnPossuiCadastro:
+                    goToLogin();
+                    break;
+                case R.id.btnCadastrarC:
                     validarDadosDeCadastro();
-                }
-            });
+                    break;
+            }
         }
 
         private void validarDadosDeCadastro(){
