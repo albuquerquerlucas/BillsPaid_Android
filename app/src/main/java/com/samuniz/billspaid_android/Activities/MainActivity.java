@@ -232,7 +232,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textCardContVal = findViewById(R.id.textCardContVal);
         textCardContVal.setOnClickListener(this);
 
-        dbClientes.addValueEventListener(new ValueEventListener() {
+        dbContas.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 contas.clear();
