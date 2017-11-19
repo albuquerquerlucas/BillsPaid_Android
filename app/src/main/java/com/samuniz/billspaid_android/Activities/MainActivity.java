@@ -20,7 +20,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.samuniz.billspaid_android.Entities.Cliente;
 import com.samuniz.billspaid_android.Entities.Conta;
 import com.samuniz.billspaid_android.Entities.Despesa;
 import com.samuniz.billspaid_android.Entities.Receita;
@@ -146,7 +148,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     dbContas.child(id).setValue(c);
                     List<String> listaContas = new ArrayList<>();
                     listaContas.add(c.getId());
-
                     dbClientes.child(mmUser.getUid()).child("contas").setValue(listaContas);
                 }else{
                     Toast.makeText(getApplicationContext(), "Preencha os campos.", Toast.LENGTH_SHORT).show();
@@ -227,19 +228,57 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void preencheCardContas(){
+
+        dbClientes.child(mmUser.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Cliente cliente = dataSnapshot.getValue(Cliente.class);
+                retornaContasDoCliente(cliente.getContas());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void retornaContasDoCliente(List<String> idContas){
+
         contas = new ArrayList<>();
         listaParaSomaContas = new ArrayList<>();
         textCardContVal = findViewById(R.id.textCardContVal);
         textCardContVal.setOnClickListener(this);
 
-        dbContas.addValueEventListener(new ValueEventListener() {
+        for(String idIndividuaContas : idContas){
+            Query query = dbContas.orderByValue().equalTo(idIndividuaContas);
+            query.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Conta conta = dataSnapshot.getValue(Conta.class);
+                    listaParaSomaContas.add(conta.getValor());
+                    calcular = new CalculaValores();
+                    String total = calcular.calculaTotal(listaParaSomaContas);
+                    textCardContVal.setText(total);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        };
+
+
+        /*Query query = dbClientes.child(mmUser.getUid()).child("cursos").orderByValue().equalTo(idContas);
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 contas.clear();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    Conta c = snapshot.getValue(Conta.class);
-                    contas.add(c);
-                    listaParaSomaContas.add(c.getValor());
+                for(DataSnapshot snap : dataSnapshot.getChildren()){
+                    Conta minhasContas = snap.getValue(Conta.class);
+                    contas.add(minhasContas);
+                    listaParaSomaContas.add(minhasContas.getValor());
                     calcular = new CalculaValores();
                     String total = calcular.calculaTotal(listaParaSomaContas);
                     textCardContVal.setText(total);
@@ -250,7 +289,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
+
     }
 
     private void preencheCardDespesas(){
