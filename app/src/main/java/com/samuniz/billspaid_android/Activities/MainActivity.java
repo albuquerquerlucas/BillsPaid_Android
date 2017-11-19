@@ -146,6 +146,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     dbContas.child(id).setValue(c);
                     List<String> listaContas = new ArrayList<>();
                     listaContas.add(c.getId());
+
                     dbClientes.child(mmUser.getUid()).child("contas").setValue(listaContas);
                 }else{
                     Toast.makeText(getApplicationContext(), "Preencha os campos.", Toast.LENGTH_SHORT).show();
