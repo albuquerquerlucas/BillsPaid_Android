@@ -141,11 +141,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String valor = edtValorFormC.getText().toString();
 
                 if(!descricao.equals("") && !valor.equals("")){
-                    List<String> listaContas = new ArrayList<>();
-                    listaContas.add(id);
                     Conta c = new Conta(id, descricao, valor);
                     dbContas = FirebaseDatabase.getInstance().getReference("contas");
                     dbContas.child(id).setValue(c);
+                    List<String> listaContas = new ArrayList<>();
+                    listaContas.add(c.getId());
                     dbClientes.child(mmUser.getUid()).child("contas").setValue(listaContas);
                 }else{
                     Toast.makeText(getApplicationContext(), "Preencha os campos.", Toast.LENGTH_SHORT).show();
