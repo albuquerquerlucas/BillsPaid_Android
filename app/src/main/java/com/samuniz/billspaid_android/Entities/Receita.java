@@ -6,14 +6,16 @@ public class Receita implements Serializable {
     private String id;
     private String descricao;
     private String valor;
+    private String idCliente;
 
     public Receita (){
     }
 
-    public Receita(String id, String descricao, String valor) {
+    public Receita(String id, String descricao, String valor, String idCliente) {
         this.id = id;
         this.descricao = descricao;
         this.valor = valor;
+        this.idCliente = idCliente;
     }
 
     public String getId() {
@@ -38,5 +40,13 @@ public class Receita implements Serializable {
 
     public void setValor(String valor) {
         this.valor = valor;
+    }
+
+    public String getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(String idCliente) {
+        this.idCliente = idCliente;
     }
 }

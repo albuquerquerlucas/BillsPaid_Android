@@ -36,13 +36,13 @@
     <LinearLayout
         android:id="@+id/layoutCLista2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
         android:layout_alignParentBottom="true"
         android:background="@color/card_conta_backgound"
         android:gravity="right"
         android:orientation="horizontal">
 
-        <TextView
+        <!--<TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="5dp"
@@ -64,6 +64,6 @@
             android:text="0,00"
             android:textColor="@color/card_conta_backgound_fonte"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold" />-->
     </LinearLayout>
 </RelativeLayout>

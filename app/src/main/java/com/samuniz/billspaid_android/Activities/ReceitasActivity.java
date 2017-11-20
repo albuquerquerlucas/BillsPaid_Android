@@ -61,8 +61,10 @@ public class ReceitasActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Receita r = snapshot.getValue(Receita.class);
-                    receitas.add(r);
-                    listaParaSoma.add(r.getValor());
+                    if(r.getIdCliente().equals(String.valueOf(mUserR.getUid()))){
+                        receitas.add(r);
+                        listaParaSoma.add(r.getValor());
+                    }
                     calcular = new CalculaValores();
                     String total = calcular.calculaTotal(listaParaSoma);
                     txtReceitasListaTotal.setText(total);

@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "806462188991",
-    "firebase_url": "https://billspaid-3cd63.firebaseio.com",
-    "project_id": "billspaid-3cd63",
-    "storage_bucket": "billspaid-3cd63.appspot.com"
+    "project_number": "162861519286",
+    "firebase_url": "https://caseaplicacao.firebaseio.com",
+    "project_id": "caseaplicacao",
+    "storage_bucket": "caseaplicacao.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:806462188991:android:8aac1dc830ad766b",
+        "mobilesdk_app_id": "1:162861519286:android:69943c8fd1df1e3c",
         "android_client_info": {
-          "package_name": "com.samuniz.billspaid_android"
+          "package_name": "com.luke.caseappmatricula"
         }
       },
       "oauth_client": [
         {
-          "client_id": "806462188991-gndk14gh4g7u7lik6e08hnne2eh4o2fh.apps.googleusercontent.com",
+          "client_id": "162861519286-nql0vitrg8o5red2rmp6fc58peoobn4d.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.samuniz.billspaid_android",
-            "certificate_hash": "152ecc5e33da1f9d4beaa2b26cba7b55aff0c432"
+            "package_name": "com.luke.caseappmatricula",
+            "certificate_hash": "89442870d195896ca56f27d6c1f6353ed378072b"
           }
         },
         {
-          "client_id": "806462188991-i0eq5adn859nbdp1giujsj1om07hj7vp.apps.googleusercontent.com",
+          "client_id": "162861519286-m7qcceshq30v0r4al1pr58sp7u481m81.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDoYq1n_LAH5uVyIsi6M5ZJMmDda7lTUZg"
+          "current_key": "AIzaSyAQnxC6Uf-g8O8D5KkUnCt5apYBQyzMXrU"
         }
       ],
       "services": {
@@ -40,10 +40,41 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "806462188991-i0eq5adn859nbdp1giujsj1om07hj7vp.apps.googleusercontent.com",
+              "client_id": "162861519286-m7qcceshq30v0r4al1pr58sp7u481m81.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162861519286:android:8aac1dc830ad766b",
+        "android_client_info": {
+          "package_name": "com.samuniz.billspaid_android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162861519286-m7qcceshq30v0r4al1pr58sp7u481m81.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQnxC6Uf-g8O8D5KkUnCt5apYBQyzMXrU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2

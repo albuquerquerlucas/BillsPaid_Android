@@ -6,14 +6,13 @@ public class Cliente {
 
     private String id;
     private String nome;
-    private List<String> contas;
+
     public Cliente() {
     }
 
-    public Cliente(String id, String nome, List<String> contas) {
+    public Cliente(String id, String nome) {
         this.id = id;
         this.nome = nome;
-        this.contas = contas;
     }
 
     public String getId() {
@@ -32,11 +31,4 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public List<String> getContas() {
-        return contas;
-    }
-
-    public void setContas(List<String> contas) {
-        this.contas = contas;
-    }
 }

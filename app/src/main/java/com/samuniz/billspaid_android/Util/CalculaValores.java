@@ -19,7 +19,12 @@ public class CalculaValores {
             vTotal = vAtual + vTotal;
         }
 
-        result = df.format(vTotal);
+        if(vTotal == 0){
+            result = "0,00";
+        }else{
+            result = df.format(vTotal);
+        }
+
         return result;
     }
 }

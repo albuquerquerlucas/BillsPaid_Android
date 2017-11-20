@@ -62,8 +62,10 @@ public class DespesasActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Despesa d = snapshot.getValue(Despesa.class);
-                    despesas.add(d);
-                    listaParaSoma.add(d.getValor());
+                    if(d.getIdCliente().equals(String.valueOf(mUserD.getUid()))){
+                        despesas.add(d);
+                        listaParaSoma.add(d.getValor());
+                    }
                     calcular = new CalculaValores();
                     String total = calcular.calculaTotal(listaParaSoma);
                     txtDespesasListaTotal.setText(total);

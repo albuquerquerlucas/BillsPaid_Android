@@ -5,7 +5,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,18 +36,21 @@ import java.util.UUID;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private TextView txtContasM, txtDespesasM, txtReceitasM;
-    private TextView textCardContVal, textCardDespVal, textCardRecVal;
+    private TextView textCardContDesc, textCardDespVal, textCardRecVal, textCardContVal, textCardDespDesc, textCardRecDesc;
     private Button btnContaM, btnDespesaM, btnReceitaM;
     private CardView cardContas, cardDespesas, cardReceitas;
     private AlertDialog aFormContas, aFormDespesas, aFormReceitas;
     private FirebaseAuth mmAuth;
     private FirebaseUser mmUser;
     private DatabaseReference mmReference, dbClientes, dbContas, dbDespesas, dbReceitas;
-    private List<String> contas;
+    private List<Conta> contas;
     private List<Despesa> despesas;
     private List<Receita> receitas;
     private ArrayList<String> listaParaSomaContas, listaParaSomaDespesas, listaParaSomaReceitas;
     private CalculaValores calcular;
+    private Conta conta;
+    private Despesa despesa;
+    private Receita receita;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,12 +146,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String valor = edtValorFormC.getText().toString();
 
                 if(!descricao.equals("") && !valor.equals("")){
-                    Conta c = new Conta(id, descricao, valor);
-                    dbContas = FirebaseDatabase.getInstance().getReference("contas");
-                    dbContas.child(id).setValue(c);
-                    List<String> listaContas = new ArrayList<>();
-                    listaContas.add(c.getId());
-                    dbClientes.child(mmUser.getUid()).child("contas").setValue(listaContas);
+
+                    conta = new Conta(id, descricao, valor, mmUser.getUid());
+                    dbContas.child(id).setValue(conta);
                 }else{
                     Toast.makeText(getApplicationContext(), "Preencha os campos.", Toast.LENGTH_SHORT).show();
                 }
@@ -182,9 +181,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String valor = edtValorFormD.getText().toString();
 
                 if(!descricao.equals("") && !valor.equals("")){
-                    Despesa d = new Despesa(id, descricao, valor);
+
+                    despesa = new Despesa(id, descricao, valor, mmUser.getUid());
                     dbDespesas = FirebaseDatabase.getInstance().getReference("despesas");
-                    dbDespesas.child(id).setValue(d);
+                    dbDespesas.child(id).setValue(despesa);
                 }else{
                     Toast.makeText(getApplicationContext(), "Preencha os campos.", Toast.LENGTH_SHORT).show();
                 }
@@ -217,9 +217,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String valor = edtValorFormR.getText().toString();
 
                 if(!descricao.equals("") && !valor.equals("")){
-                    Receita r = new Receita(id, descricao, valor);
+                    receita = new Receita(id, descricao, valor, mmUser.getUid());
                     dbReceitas = FirebaseDatabase.getInstance().getReference("receitas");
-                    dbReceitas.child(id).setValue(r);
+                    dbReceitas.child(id).setValue(receita);
                 }else{
                     Toast.makeText(getApplicationContext(), "Preencha os campos.", Toast.LENGTH_SHORT).show();
                 }
@@ -230,16 +230,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void preencheCardContas(){
 
-        Query query = dbClientes.orderByKey().equalTo(mmUser.getUid());
-        query.addValueEventListener(new ValueEventListener() {
+        contas = new ArrayList<>();
+        listaParaSomaContas = new ArrayList<>();
+        textCardContVal = findViewById(R.id.textCardContVal);
+
+        dbContas.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    for(DataSnapshot data : dataSnapshot.getChildren()){
-                        retornaContasDoCliente(data);
+                listaParaSomaContas.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Conta c = snapshot.getValue(Conta.class);
+                    if(c.getIdCLiente().equals(String.valueOf(mmUser.getUid()))){
+                        contas.add(c);
+                        listaParaSomaContas.add(c.getValor());
                     }
-                }else{
-                    Log.i("ERR DATA CLIENTE", "Encontrou nada zé ruela!");
+                    calcular = new CalculaValores();
+                    String total = calcular.calculaTotal(listaParaSomaContas);
+                    textCardContVal.setText(total);
                 }
             }
 
@@ -250,49 +257,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    private void retornaContasDoCliente(DataSnapshot dataSnapshot){
-
-        Cliente cliente = dataSnapshot.getValue(Cliente.class);
-        contas = new ArrayList<>();
-        contas = cliente.getContas();
-        listaParaSomaContas = new ArrayList<>();
-        textCardContVal = findViewById(R.id.textCardContVal);
-
-        for(int i = 0; i< contas.size(); i++){
-            Query query = dbContas.orderByKey().equalTo(contas.get(i));
-            query.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    for(DataSnapshot data : dataSnapshot.getChildren()){
-                        Conta c = data.getValue(Conta.class);
-                        listaParaSomaContas.add(c.getValor());
-                        calcular = new CalculaValores();
-                        String total = calcular.calculaTotal(listaParaSomaContas);
-                        textCardContVal.setText(total);
-                    }
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-        }
-    }
-
     private void preencheCardDespesas(){
         despesas = new ArrayList<>();
         listaParaSomaDespesas = new ArrayList<>();
         textCardDespVal = findViewById(R.id.textCardDespVal);
-        textCardDespVal.setOnClickListener(this);
 
         dbDespesas.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                listaParaSomaDespesas.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Despesa d = snapshot.getValue(Despesa.class);
-                    despesas.add(d);
-                    listaParaSomaDespesas.add(d.getValor());
+                    if(d.getIdCliente().equals(String.valueOf(mmUser.getUid()))){
+                        despesas.add(d);
+                        listaParaSomaDespesas.add(d.getValor());
+                    }
                     calcular = new CalculaValores();
                     String total = calcular.calculaTotal(listaParaSomaDespesas);
                     textCardDespVal.setText(total);
@@ -310,15 +289,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         receitas = new ArrayList<>();
         listaParaSomaReceitas = new ArrayList<>();
         textCardRecVal = findViewById(R.id.textCardRecVal);
-        textCardRecVal.setOnClickListener(this);
 
         dbReceitas.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                listaParaSomaReceitas.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Receita r = snapshot.getValue(Receita.class);
-                    receitas.add(r);
-                    listaParaSomaReceitas.add(r.getValor());
+                    if(r.getIdCliente().equals(String.valueOf(mmUser.getUid()))){
+                        receitas.add(r);
+                        listaParaSomaReceitas.add(r.getValor());
+                    }
                     calcular = new CalculaValores();
                     String total = calcular.calculaTotal(listaParaSomaReceitas);
                     textCardRecVal.setText(total);

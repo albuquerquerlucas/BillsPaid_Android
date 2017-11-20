@@ -10,14 +10,16 @@ public class Despesa implements Serializable{
     private String conta;
     private String categoria;
     private String pago;
+    private String idCliente;
 
     public Despesa (){
     }
 
-    public Despesa(String id, String descricao, String valor) {
+    public Despesa(String id, String descricao, String valor, String idCliente) {
         this.id = id;
         this.descricao = descricao;
         this.valor = valor;
+        this.idCliente = idCliente;
     }
 
     /*public Despesa(String id, String descricao, String valor, String dataD, String conta, String categoria, String pago) {
@@ -84,5 +86,13 @@ public class Despesa implements Serializable{
 
     public void setPago(String pago) {
         this.pago = pago;
+    }
+
+    public String getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(String idCliente) {
+        this.idCliente = idCliente;
     }
 }

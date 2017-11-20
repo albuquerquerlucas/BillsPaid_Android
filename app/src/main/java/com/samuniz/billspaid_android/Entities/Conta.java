@@ -7,14 +7,16 @@ public class Conta implements Serializable {
     private String id;
     private String descricao;
     private String valor;
+    private String idCLiente;
 
     public Conta(){
     }
 
-    public Conta(String id, String descricao, String valor) {
+    public Conta(String id, String descricao, String valor, String idCliente) {
         this.id = id;
         this.descricao = descricao;
         this.valor = valor;
+        this.idCLiente = idCliente;
     }
 
     public String getId() {
@@ -39,5 +41,19 @@ public class Conta implements Serializable {
 
     public void setValor(String valor) {
         this.valor = valor;
+    }
+
+    public String getIdCLiente() {
+        return idCLiente;
+    }
+
+    public void setIdCLiente(String idCLiente) {
+        this.idCLiente = idCLiente;
+    }
+
+    @Override
+    public String toString(){
+
+        return getDescricao() + " " + getValor() + "\n";
     }
 }

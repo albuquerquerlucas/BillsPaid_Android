@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.samuniz.billspaid_android.Entities.Cliente;
+import com.samuniz.billspaid_android.Entities.Conta;
 import com.samuniz.billspaid_android.R;
 
 import java.util.ArrayList;
@@ -95,8 +96,7 @@ import java.util.List;
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
                         String id = task.getResult().getUser().getUid();
-                        List<String> lista = new ArrayList<>();
-                        Cliente cliente = new Cliente(id, nomeInput, lista);
+                        Cliente cliente = new Cliente(id, nomeInput);
                         mReference.child("clientes").child(id).setValue(cliente);
                         goToLogin();
                     } else {
