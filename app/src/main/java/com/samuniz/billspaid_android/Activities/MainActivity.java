@@ -5,7 +5,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,9 +20,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.samuniz.billspaid_android.Entities.Cliente;
 import com.samuniz.billspaid_android.Entities.Conta;
 import com.samuniz.billspaid_android.Entities.Despesa;
 import com.samuniz.billspaid_android.Entities.Receita;
@@ -44,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FirebaseAuth mmAuth;
     private FirebaseUser mmUser;
     private DatabaseReference mmReference, dbClientes, dbContas, dbDespesas, dbReceitas;
-    private List<String> contas;
+    private List<Conta> contas;
     private List<Despesa> despesas;
     private List<Receita> receitas;
     private ArrayList<String> listaParaSomaContas, listaParaSomaDespesas, listaParaSomaReceitas;
@@ -229,8 +226,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void preencheCardContas(){
+        contas = new ArrayList<>();
+        listaParaSomaContas = new ArrayList<>();
+        textCardContVal = findViewById(R.id.textCardContVal);
+        textCardContVal.setOnClickListener(this);
 
-        Query query = dbClientes.orderByKey().equalTo(mmUser.getUid());
+        dbContas.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                contas.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Conta c = snapshot.getValue(Conta.class);
+                    contas.add(c);
+                    listaParaSomaContas.add(c.getValor());
+                    calcular = new CalculaValores();
+                    String total = calcular.calculaTotal(listaParaSomaContas);
+                    textCardContVal.setText(total);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        /*Query query = dbClientes.orderByKey().equalTo(mmUser.getUid());
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -247,10 +268,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
     }
 
-    private void retornaContasDoCliente(DataSnapshot dataSnapshot){
+    /*private void retornaContasDoCliente(DataSnapshot dataSnapshot){
 
         Cliente cliente = dataSnapshot.getValue(Cliente.class);
         contas = new ArrayList<>();
@@ -278,7 +299,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             });
         }
-    }
+    }*/
 
     private void preencheCardDespesas(){
         despesas = new ArrayList<>();
