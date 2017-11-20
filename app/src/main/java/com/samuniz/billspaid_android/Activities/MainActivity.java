@@ -244,7 +244,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void retornaContasDoCliente(List<String> idContas){
-
         contas = new ArrayList<>();
         listaParaSomaContas = new ArrayList<>();
         textCardContVal = findViewById(R.id.textCardContVal);
