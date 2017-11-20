@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FirebaseAuth mmAuth;
     private FirebaseUser mmUser;
     private DatabaseReference mmReference, dbClientes, dbContas, dbDespesas, dbReceitas;
-    private List<Conta> contas;
+    private List<String> contas;
     private List<Despesa> despesas;
     private List<Receita> receitas;
     private ArrayList<String> listaParaSomaContas, listaParaSomaDespesas, listaParaSomaReceitas;
@@ -230,15 +230,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void preencheCardContas(){
 
-        dbClientes.child(mmUser.getUid()).addValueEventListener(new ValueEventListener() {
+        Query query = dbClientes.orderByKey().equalTo(mmUser.getUid());
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Cliente cliente = dataSnapshot.getValue(Cliente.class);
-                for(String c : cliente.getContas()){
-                    Log.i("CLIENTE CONTAS", c);
+                if(dataSnapshot.exists()){
+                    for(DataSnapshot data : dataSnapshot.getChildren()){
+                        retornaContasDoCliente(data);
+                    }
+                }else{
+                    Log.i("ERR DATA CLIENTE", "Encontrou nada zé ruela!");
                 }
-
-                retornaContasDoCliente(cliente.getContas());
             }
 
             @Override
@@ -248,22 +250,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    private void retornaContasDoCliente(List<String> idContas){
+    private void retornaContasDoCliente(DataSnapshot dataSnapshot){
+
+        Cliente cliente = dataSnapshot.getValue(Cliente.class);
         contas = new ArrayList<>();
+        contas = cliente.getContas();
         listaParaSomaContas = new ArrayList<>();
         textCardContVal = findViewById(R.id.textCardContVal);
-        textCardContVal.setOnClickListener(this);
 
-        for(String idIndividuaContas : idContas){
-            Query query = dbContas.orderByValue().equalTo(idIndividuaContas);
+        for(int i = 0; i< contas.size(); i++){
+            Query query = dbContas.orderByKey().equalTo(contas.get(i));
             query.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    Conta conta = dataSnapshot.getValue(Conta.class);
-                    listaParaSomaContas.add(conta.getValor());
-                    calcular = new CalculaValores();
-                    String total = calcular.calculaTotal(listaParaSomaContas);
-                    textCardContVal.setText(total);
+                    for(DataSnapshot data : dataSnapshot.getChildren()){
+                        Conta c = data.getValue(Conta.class);
+                        listaParaSomaContas.add(c.getValor());
+                        calcular = new CalculaValores();
+                        String total = calcular.calculaTotal(listaParaSomaContas);
+                        textCardContVal.setText(total);
+                    }
                 }
 
                 @Override
@@ -271,30 +277,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 }
             });
-        };
-
-
-        /*Query query = dbClientes.child(mmUser.getUid()).child("cursos").orderByValue().equalTo(idContas);
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                contas.clear();
-                for(DataSnapshot snap : dataSnapshot.getChildren()){
-                    Conta minhasContas = snap.getValue(Conta.class);
-                    contas.add(minhasContas);
-                    listaParaSomaContas.add(minhasContas.getValor());
-                    calcular = new CalculaValores();
-                    String total = calcular.calculaTotal(listaParaSomaContas);
-                    textCardContVal.setText(total);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
-
+        }
     }
 
     private void preencheCardDespesas(){
